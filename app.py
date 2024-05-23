@@ -20,7 +20,7 @@ if "chat" not in st.session_state:
 map1 = KeplerGl(height=400)
 
 # Load CSV file
-df = pd.read_csv('/Users/kailin/Downloads/Jordan Standardized Precipitation Index.csv')
+df = pd.read_csv('Jordan Standardized Precipitation Index.csv')
 
 if "df" in st.session_state:
     map1.add_data(data=st.session_state.df, name=title)
