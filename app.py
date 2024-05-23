@@ -11,7 +11,7 @@ st.markdown(f"### {title}")
 
 # Set up LLM
 Groq_KEY = st.secrets["Groq_KEY"]
-llm = ChatGroq(temperature=0, model_name="Llama3-8b-8192", api_key=Groq_KEY)
+llm = ChatGroq(temperature=0, model_name="llama3-70b-8192", api_key=Groq_KEY)
 
 # Add a Chat history object to Streamlit session state
 if "chat" not in st.session_state:
