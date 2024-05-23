@@ -19,6 +19,23 @@ if "chat" not in st.session_state:
 # Create a Kepler map
 map1 = KeplerGl(height=400)
 
+config = {
+    "version": "v1",
+    "config": {
+        "mapState": {
+            "bearing": 0,
+            "latitude": 32.24,
+            "longitude": 35.35,
+            "pitch": 0,
+            "zoom": 6,
+        },
+        "visState": {
+          'layerBlending': "additive",
+        }
+    },
+}
+map1.config = config
+
 # Load CSV file
 df = pd.read_csv('Jordan Standardized Precipitation Index.csv')
 
@@ -31,7 +48,7 @@ else:
 col1, col2 = st.columns([3, 2])
 
 with col1:
-    keplergl_static(map1, center_map=True)
+    keplergl_static(map1)
 
 # Set up the chat interface
 with col2:
