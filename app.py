@@ -71,10 +71,13 @@ with col2:
 
             with st.chat_message("assistant"):
                 with st.spinner("We are in the process of your request"):
-                    result = get_df_code(llm, user_input)
-                    exec(result)
-                    result = f"Your request was processed. {st.session_state.df.shape[0]} rows are found and displayed"
-                    st.session_state.chat.append({"role": "assistant", "content": result})
+                    try:
+                        result = get_df_code(llm, user_input)
+                        exec(result)
+                        response = f"Your request was processed. {st.session_state.df.shape[0]} rows are found and displayed"
+                    except:
+                        response = "We are not able to process your request. Please refine your request and try again."
+                    st.session_state.chat.append({"role": "assistant", "content": response})
                     st.rerun()
 
 if "df" in st.session_state:
