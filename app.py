@@ -9,7 +9,8 @@ title = "Jordan Standardized Precipitation Index"
 st.set_page_config(layout="wide", page_title=title)
 st.markdown(f"### {title}")
 
-Groq_KEY = "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"
+# Set up LLM
+Groq_KEY = st.secrets["Groq_KEY"]
 llm = ChatGroq(temperature=0, model_name="Llama3-8b-8192", api_key=Groq_KEY)
 
 # Add a Chat history object to Streamlit session state
