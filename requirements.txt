@@ -1,0 +1,6 @@
+streamlit
+streamlit-keplergl
+pandas
+langchain
+langchain_groq
+groq
