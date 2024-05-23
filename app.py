@@ -55,8 +55,8 @@ with col2:
                 with st.spinner("We are in the process of your request"):
                     result = get_df_code(llm, user_input)
                     exec(result)
-                    st.markdown(str(st.session_state.df.shape))
-                    st.session_state.chat.append({"role": "assistant", "content": str(st.session_state.df.shape)})
+                    result = "Your request was processed and displayed"
+                    st.session_state.chat.append({"role": "assistant", "content": result})
                     st.rerun()
 
 if "df" in st.session_state:
