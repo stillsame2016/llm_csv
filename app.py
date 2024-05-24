@@ -79,8 +79,8 @@ with col2:
                             st.session_state.df = st.session_state.df.to_frame().T
                         response = f"""
                                     Your request was processed. {st.session_state.df.shape[0]} 
-                                    { "rows" if st.session_state.df.shape[0] > 1 else "row"} 
-                                    are found and displayed.
+                                    { "rows are" if st.session_state.df.shape[0] > 1 else "row is"} 
+                                    found and displayed.
                                     """
                     except:
                         response = "We are not able to process your request. Please refine your request and try again."
