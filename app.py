@@ -75,6 +75,8 @@ with col2:
                     try:
                         result = get_df_code(llm, user_input)
                         exec(result)
+                        if isinstance(st.session_state.df, pd.Series):
+                            st.session_state.df = st.session_state.df.to_frame().T
                         response = f"Your request was processed. {st.session_state.df.shape[0]} rows are found and displayed"
                     except:
                         response = "We are not able to process your request. Please refine your request and try again."
