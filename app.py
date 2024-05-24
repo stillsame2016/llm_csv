@@ -1,3 +1,4 @@
+import time
 import pandas as pd
 import streamlit as st
 from keplergl import KeplerGl
@@ -74,8 +75,8 @@ with col2:
                     try:
                         result = get_df_code(llm, user_input)
                         st.markdown(result)
-                        time.sleep(20)
-                        exec(result)
+                        time.sleeep(10)
+                        # exec(result)
                         response = f"Your request was processed. {st.session_state.df.shape[0]} rows are found and displayed"
                     except:
                         response = "We are not able to process your request. Please refine your request and try again."
