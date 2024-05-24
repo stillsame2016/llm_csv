@@ -77,7 +77,11 @@ with col2:
                         exec(result)
                         if isinstance(st.session_state.df, pd.Series):
                             st.session_state.df = st.session_state.df.to_frame().T
-                        response = f"Your request was processed. {st.session_state.df.shape[0]} rows are found and displayed"
+                        response = f"""
+                                    Your request was processed. {st.session_state.df.shape[0]} 
+                                    { "rows" if st.session_state.df.shape[0] > 1 else "row"} 
+                                    are found and displayed.
+                                    """
                     except:
                         response = "We are not able to process your request. Please refine your request and try again."
                     st.session_state.chat.append({"role": "assistant", "content": response})
