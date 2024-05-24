@@ -74,7 +74,7 @@ with col2:
                 with st.spinner("We are in the process of your request"):
                     try:
                         result = get_df_code(llm, user_input)
-                        st.markdown(result)
+                        st.markdown(f"result: {result}")
                         time.sleeep(10)
                         # exec(result)
                         response = f"Your request was processed. {st.session_state.df.shape[0]} rows are found and displayed"
