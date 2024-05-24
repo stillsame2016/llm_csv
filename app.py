@@ -74,6 +74,7 @@ with col2:
                     try:
                         result = get_df_code(llm, user_input)
                         st.markdown(result)
+                        time.sleep(20)
                         exec(result)
                         response = f"Your request was processed. {st.session_state.df.shape[0]} rows are found and displayed"
                     except:
