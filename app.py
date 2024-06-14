@@ -40,6 +40,9 @@ map1.config = config
 
 # Load CSV file
 df = pd.read_csv('Jordan Standardized Precipitation Index.csv')
+df['Time'] = pd.to_datetime(df['Time'], format='%m/%d/%y')
+df['Time'] = df['Time'].dt.strftime('%Y-%m-%d')
+df['Time'] = df['Time'].fillna('')
 
 if "df" in st.session_state:
     map1.add_data(data=st.session_state.df, name=title)
@@ -74,16 +77,20 @@ with col2:
                 with st.spinner("We are in the process of your request"):
                     try:
                         result = get_df_code(llm, user_input)
-                        exec(result)
-                        if isinstance(st.session_state.df, pd.Series):
-                            st.session_state.df = st.session_state.df.to_frame().T
-                        response = f"""
-                                    Your request was processed. {st.session_state.df.shape[0]} 
-                                    { "rows are" if st.session_state.df.shape[0] > 1 else "row is"} 
-                                    found and displayed.
-                                    """
-                    except:
-                        response = "We are not able to process your request. Please refine your request and try again."
+                        if result['category'] == 'Other':
+                            response = result['answer']
+                        else:
+                            exec(result['answer'])
+                            if isinstance(st.session_state.df, pd.Series):
+                                st.session_state.df = st.session_state.df.to_frame().T
+                            response = f"""
+                                        Your request has been processed. {st.session_state.df.shape[0]}
+                                        { "rows are" if st.session_state.df.shape[0] > 1 else "row is"}
+                                        found and displayed.
+                                        """
+                    except Exception as e:
+                        traceback.print_exc()
+                        response = f"We are not able to process your request. Please refine your request and try again."
                     st.session_state.chat.append({"role": "assistant", "content": response})
                     st.rerun()
 
